@@ -30,6 +30,10 @@ flutter_lints
 3.5
 file:///Users/furkanerdogan/.pub-cache/hosted/pub.dev/flutter_lints-5.0.0/
 file:///Users/furkanerdogan/.pub-cache/hosted/pub.dev/flutter_lints-5.0.0/lib/
+hexcolor
+2.18
+file:///Users/furkanerdogan/.pub-cache/hosted/pub.dev/hexcolor-3.0.1/
+file:///Users/furkanerdogan/.pub-cache/hosted/pub.dev/hexcolor-3.0.1/lib/
 leak_tracker
 3.2
 file:///Users/furkanerdogan/.pub-cache/hosted/pub.dev/leak_tracker-10.0.7/
@@ -110,4 +114,8 @@ flutter_test
 3.3
 file:///Users/furkanerdogan/development/flutter/packages/flutter_test/
 file:///Users/furkanerdogan/development/flutter/packages/flutter_test/lib/
+flutter_web_plugins
+3.2
+file:///Users/furkanerdogan/development/flutter/packages/flutter_web_plugins/
+file:///Users/furkanerdogan/development/flutter/packages/flutter_web_plugins/lib/
 2
