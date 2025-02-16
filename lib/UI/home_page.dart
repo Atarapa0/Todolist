@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:todolist/constants/tasktype.dart';
+import 'package:todolist/models/task.dart';
 import '../constants/constans.dart';
+import 'todolist.dart';
+import 'add_new_task.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -8,6 +12,38 @@ class HomePage extends StatefulWidget {
   @override
   State<HomePage> createState() => _HomePageState();
 }
+
+//List<String> todoList = ["Study Lessons", "Run 5k", "Go To Party"];
+//List<String> completedList = ["Game meetup", "Go to the gym", "Take out trash"];
+List<Task> todoList = [
+  Task(
+      type: TaskType.note,
+      title: "Study Lessons",
+      description: "Study Less",
+      isCompleted: "false"),
+  Task(
+      type: TaskType.calender,
+      title: "Run 5k",
+      description: "Run",
+      isCompleted: "false"),
+  Task(
+      type: TaskType.contest,
+      title: "Go To Party",
+      description: "Party",
+      isCompleted: "false"),
+  Task(
+      type: TaskType.calender,
+      title: "Run 5k",
+      description: "Run",
+      isCompleted: "false"),
+];
+List<Task> completedList = [
+  Task(
+      type: TaskType.note,
+      title: "Study Lessons",
+      description: "Study Lessons",
+      isCompleted: "false")
+];
 
 class _HomePageState extends State<HomePage> {
   bool isChecked = false;
@@ -20,6 +56,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: HexColor(backgroundColor),
         body: Column(
           children: [
+            //Header
             Container(
               width: deviceWidth,
               height: deviceHeight * 0.3,
@@ -54,39 +91,53 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Icon(
-                            Icons.menu_open_outlined,
-                            size: 50,
-                          ),
-                          Text(
-                            'Study Lesson',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 18),
-                          ),
-                          Checkbox(
-                              value: isChecked,
-                              onChanged: (val) => {
-                                    setState(() {
-                                      isChecked = val!;
-                                    })
-                                  }),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+            //Top column
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: SingleChildScrollView(
+                    child: ListView.builder(
+                        shrinkWrap: true,
+                        primary: false,
+                        itemCount: todoList.length,
+                        itemBuilder: (context, index) {
+                          return TodoList(task: todoList[index]);
+                        })),
+              ),
             ),
+            //Completed Tasks
+            Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: const Text(
+                  'Completed Tasks',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+            //Bottom Column
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: SingleChildScrollView(
+                  child: SingleChildScrollView(
+                      child: ListView.builder(
+                          shrinkWrap: true,
+                          primary: false,
+                          itemCount: completedList.length,
+                          itemBuilder: (context, index) {
+                            return TodoList(task: completedList[index]);
+                          })),
+                ),
+              ),
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => AddNewTask()));
+                },
+                child: Text('Add New'))
           ],
         ),
       ),
