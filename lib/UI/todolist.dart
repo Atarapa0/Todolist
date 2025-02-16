@@ -25,18 +25,20 @@ class _TodoListState extends State<TodoList> {
                 ? Image.asset("assets/Icons/Category.png")
                 : widget.task.type == TaskType.calender
                     ? Image.asset("assets/Icons/Category-2.png")
-                    : Image.asset("assets/Icons/Category-3.png"),
-            Column(
-              children: [
-                Text(
-                  widget.task.title,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                ),
-                Text(
-                  widget.task.description,
-                  style: TextStyle(fontSize: 14),
-                ),
-              ],
+                    : Image.asset("assets/Icons/Category.png"),
+            Expanded(
+              child: Column(
+                children: [
+                  Text(
+                    widget.task.title,
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  ),
+                  Text(
+                    widget.task.description,
+                    style: TextStyle(fontSize: 14),
+                  ),
+                ],
+              ),
             ),
             Checkbox(
                 value: isChecked,
