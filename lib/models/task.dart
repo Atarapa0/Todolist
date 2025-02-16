@@ -1,14 +1,14 @@
 import '../constants/tasktype.dart';
 
 class Task {
-  Task({
-    required this.title,
-    required this.description,
-    required this.isCompleted,
-    required this.type,
-  });
-  final TaskType type;
-  final String title;
-  final String description;
-  final String isCompleted;
+  String title;
+  String description;
+  TaskType type;
+  bool isCompleted;
+
+  Task(
+      {required this.title,
+      required this.description,
+      required this.type,
+      this.isCompleted = false});
 }

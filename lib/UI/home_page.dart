@@ -20,29 +20,29 @@ List<Task> todoList = [
       type: TaskType.note,
       title: "Study Lessons",
       description: "Study Less",
-      isCompleted: "false"),
+      isCompleted: false),
   Task(
       type: TaskType.calender,
       title: "Run 5k",
       description: "Run",
-      isCompleted: "false"),
+      isCompleted: false),
   Task(
       type: TaskType.contest,
       title: "Go To Party",
       description: "Party",
-      isCompleted: "false"),
+      isCompleted: false),
   Task(
       type: TaskType.calender,
       title: "Run 5k",
       description: "Run",
-      isCompleted: "false"),
+      isCompleted: false),
 ];
 List<Task> completedList = [
   Task(
       type: TaskType.note,
       title: "Study Lessons",
       description: "Study Lessons",
-      isCompleted: "false")
+      isCompleted: false)
 ];
 
 class _HomePageState extends State<HomePage> {

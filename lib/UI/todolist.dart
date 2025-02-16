@@ -15,6 +15,7 @@ class _TodoListState extends State<TodoList> {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: widget.task.isCompleted ? Colors.grey : Colors.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Padding(
         padding: const EdgeInsets.all(20),
@@ -31,22 +32,36 @@ class _TodoListState extends State<TodoList> {
                 children: [
                   Text(
                     widget.task.title,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                    style: TextStyle(
+                        decoration: widget.task.isCompleted
+                            ? TextDecoration.lineThrough
+                            : TextDecoration.none,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18),
                   ),
                   Text(
                     widget.task.description,
-                    style: TextStyle(fontSize: 14),
+                    style: TextStyle(
+                      fontSize: 14,
+                      decoration: widget.task.isCompleted
+                          ? TextDecoration.lineThrough
+                          : TextDecoration.none,
+                    ),
                   ),
                 ],
               ),
             ),
             Checkbox(
-                value: isChecked,
-                onChanged: (val) => {
-                      setState(() {
-                        isChecked = val!;
-                      })
-                    }),
+              value: isChecked,
+              onChanged: (val) => {
+                setState(
+                  () {
+                    widget.task.isCompleted = !widget.task.isCompleted;
+                    isChecked = val!;
+                  },
+                )
+              },
+            )
           ],
         ),
       ),
