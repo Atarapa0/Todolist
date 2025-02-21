@@ -2,15 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:todolist/UI/home_page.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:todolist/constants/constans.dart';
+import 'package:todolist/constants/tasktype.dart';
+import 'package:todolist/models/task.dart';
 
 class AddNewTask extends StatefulWidget {
-  const AddNewTask({super.key});
+  const AddNewTask({super.key, required this.addnewTask});
+  final void Function(Task newtask) addnewTask;
 
   @override
   State<AddNewTask> createState() => _AddNewTaskState();
 }
 
 class _AddNewTaskState extends State<AddNewTask> {
+
+  TextEditingController titleController = TextEditingController();
+  TextEditingController dateController = TextEditingController();
+  TextEditingController timeController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
+
+  TaskType taskType = TaskType.note;
   @override
   Widget build(BuildContext context) {
     double deviceWidth = MediaQuery.of(context).size.width;
@@ -67,6 +77,7 @@ class _AddNewTaskState extends State<AddNewTask> {
               Padding(
                 padding: EdgeInsets.all(20),
                 child: TextField(
+                  controller: titleController,
                   decoration: InputDecoration(
                     fillColor: Colors.white,
                     filled: true,
@@ -94,6 +105,9 @@ class _AddNewTaskState extends State<AddNewTask> {
                             content: Text("Category selected"),
                           ),
                         );
+                        setState(() {
+                          taskType = TaskType.note;
+                        });
                       },
                       child: Image.asset('assets/Icons/Category.png'),
                     ),
@@ -104,6 +118,9 @@ class _AddNewTaskState extends State<AddNewTask> {
                             content: Text("Category selected"),
                           ),
                         );
+                        setState(() {
+                          taskType = TaskType.calender;
+                        });
                       },
                       child: Image.asset('assets/Icons/Category-2.png'),
                     ),
@@ -114,6 +131,9 @@ class _AddNewTaskState extends State<AddNewTask> {
                             content: Text("Category selected"),
                           ),
                         );
+                        setState(() {
+                          taskType = TaskType.contest;
+                        });
                       },
                       child: Image.asset('assets/Icons/Category-3.png'),
                     ),
@@ -132,6 +152,7 @@ class _AddNewTaskState extends State<AddNewTask> {
                             padding: EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 7),
                             child: TextField(
+                              controller: dateController,
                               decoration: InputDecoration(
                                 filled: true,
                                 fillColor: Colors.white,
@@ -144,11 +165,12 @@ class _AddNewTaskState extends State<AddNewTask> {
                     Expanded(
                       child: Column(
                         children: [
-                          Text("Date"),
+                          Text("Time "),
                           Padding(
                             padding: EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 7),
                             child: TextField(
+                              controller: timeController,
                               decoration: InputDecoration(
                                 filled: true,
                                 fillColor: Colors.white,
@@ -163,7 +185,7 @@ class _AddNewTaskState extends State<AddNewTask> {
               ),
               Padding(
                 padding: EdgeInsets.all(15),
-                child: Text("Notes",
+                child: Text("Description",
                     style: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 20,
@@ -172,6 +194,7 @@ class _AddNewTaskState extends State<AddNewTask> {
               SizedBox(
                 height: 300,
                 child: TextField(
+                  controller: descriptionController,
                   expands: true,
                   maxLines: null,
                   decoration: InputDecoration(
@@ -182,7 +205,17 @@ class _AddNewTaskState extends State<AddNewTask> {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Task newTask = Task(
+                    isCompleted: false,
+                    title: titleController.text,
+                    description: descriptionController.text,
+                    type: taskType,
+                  );
+                  widget.addnewTask(newTask);
+                  Navigator.of(context).pop(MaterialPageRoute(
+                      builder: (context) => HomePage()));
+                },
                 child: Text("Save"),
               ),
             ],

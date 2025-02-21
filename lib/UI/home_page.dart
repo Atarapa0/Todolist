@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:todolist/constants/tasktype.dart';
 import 'package:todolist/models/task.dart';
+import 'package:todolist/service/todo_service.dart';
 import '../constants/constans.dart';
 import 'todolist.dart';
 import 'add_new_task.dart';
@@ -13,42 +14,45 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-//List<String> todoList = ["Study Lessons", "Run 5k", "Go To Party"];
-//List<String> completedList = ["Game meetup", "Go to the gym", "Take out trash"];
-List<Task> todoList = [
-  Task(
-      type: TaskType.note,
-      title: "Study Lessons",
-      description: "Study Less",
-      isCompleted: false),
-  Task(
-      type: TaskType.calender,
-      title: "Run 5k",
-      description: "Run",
-      isCompleted: false),
-  Task(
-      type: TaskType.contest,
-      title: "Go To Party",
-      description: "Party",
-      isCompleted: false),
-  Task(
-      type: TaskType.calender,
-      title: "Run 5k",
-      description: "Run",
-      isCompleted: false),
-];
-List<Task> completedList = [
-  Task(
-      type: TaskType.note,
-      title: "Study Lessons",
-      description: "Study Lessons",
-      isCompleted: false)
-];
-
 class _HomePageState extends State<HomePage> {
+  List<Task> todoList = [
+    Task(
+        type: TaskType.note,
+        title: "Study Lessons",
+        description: "Study Less",
+        isCompleted: false),
+    Task(
+        type: TaskType.calender,
+        title: "Run 5k",
+        description: "Run",
+        isCompleted: false),
+    Task(
+        type: TaskType.contest,
+        title: "Go To Party",
+        description: "Party",
+        isCompleted: false),
+  ];
+
+  List<Task> completedList = [
+    Task(
+        type: TaskType.note,
+        title: "Study Lessons",
+        description: "Study Lessons",
+        isCompleted: false)
+  ];
+
+  void addnewTask(Task newtask) {
+    setState(() {
+      todoList.add(newtask);
+    });
+  }
+
   bool isChecked = false;
+
   @override
   Widget build(BuildContext context) {
+    TodoService todoService = TodoService();
+    todoService.getTodods();
     double deviceWidth = MediaQuery.of(context).size.width;
     double deviceHeight = MediaQuery.of(context).size.height;
     return SafeArea(
@@ -96,13 +100,19 @@ class _HomePageState extends State<HomePage> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: SingleChildScrollView(
-                    child: ListView.builder(
-                        shrinkWrap: true,
-                        primary: false,
-                        itemCount: todoList.length,
-                        itemBuilder: (context, index) {
-                          return TodoList(task: todoList[index]);
-                        })),
+                  child: FutureBuilder(
+                    future: todoService.getTodods(),
+                    builder: (context, snapshot) {
+                      return ListView.builder(
+                          shrinkWrap: true,
+                          primary: false,
+                          itemCount: todoList.length,
+                          itemBuilder: (context, index) {
+                            return TodoList(task: todoList[index]);
+                          });
+                    },
+                  ),
+                ),
               ),
             ),
             //Completed Tasks
@@ -134,8 +144,10 @@ class _HomePageState extends State<HomePage> {
             ),
             ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => AddNewTask()));
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => AddNewTask(
+                            addnewTask: (newTask) => addnewTask(newTask),
+                          )));
                 },
                 child: Text('Add New'))
           ],
