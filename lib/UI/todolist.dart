@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:todolist/models/task.dart';
-import 'package:todolist/constants/tasktype.dart';
+import 'package:todolist/models/todo.dart';
 
 class TodoList extends StatefulWidget {
   const TodoList({super.key, required this.task});
-  final Task task;
+  final Todo task;
 
   @override
   State<TodoList> createState() => _TodoListState();
@@ -15,39 +14,33 @@ class _TodoListState extends State<TodoList> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: widget.task.isCompleted ? Colors.grey : Colors.white,
+      //color: widget.task.isCompleted! ? Colors.grey : Colors.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Padding(
         padding: const EdgeInsets.all(20),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
+            /* TODOÇ Firebase işlemlerinde düzeltilecek
             widget.task.type == TaskType.note
                 ? Image.asset("assets/Icons/Category.png")
                 : widget.task.type == TaskType.calender
                     ? Image.asset("assets/Icons/Category-2.png")
-                    : Image.asset("assets/Icons/Category.png"),
+                    : Image.asset("assets/Icons/Category.png"),*/
+            Image.asset("assets/Icons/Category.png"),
             Expanded(
               child: Column(
                 children: [
                   Text(
-                    widget.task.title,
+                    widget.task.todo!,
                     style: TextStyle(
-                        decoration: widget.task.isCompleted
+                        decoration: (widget.task.isCompleted  ?? false)
                             ? TextDecoration.lineThrough
                             : TextDecoration.none,
                         fontWeight: FontWeight.bold,
                         fontSize: 18),
                   ),
-                  Text(
-                    widget.task.description,
-                    style: TextStyle(
-                      fontSize: 14,
-                      decoration: widget.task.isCompleted
-                          ? TextDecoration.lineThrough
-                          : TextDecoration.none,
-                    ),
-                  ),
+                  Text("UserID: ${widget.task.userID ?? 'No ID'}"),
                 ],
               ),
             ),
@@ -56,7 +49,7 @@ class _TodoListState extends State<TodoList> {
               onChanged: (val) => {
                 setState(
                   () {
-                    widget.task.isCompleted = !widget.task.isCompleted;
+                    widget.task.isCompleted = !(widget.task.isCompleted ?? false);
                     isChecked = val!;
                   },
                 )

@@ -16,8 +16,8 @@ bool? isCompleted;
 Todo.fromJson(Map<String, dynamic> json) {
 id = json['id'];
 todo = json['todo'];
-userID = json['userID'];
-isCompleted = json['isCompleted'];
+userID = json['userId'];
+isCompleted = json['completed'];
 }
 // To json
 Map<String, dynamic> toJson() {
