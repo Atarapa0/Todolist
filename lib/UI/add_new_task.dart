@@ -4,6 +4,8 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:todolist/constants/constans.dart';
 import 'package:todolist/constants/tasktype.dart';
 import 'package:todolist/models/task.dart';
+import 'package:todolist/models/todo.dart';
+import 'package:todolist/service/todo_service.dart';
 
 class AddNewTask extends StatefulWidget {
   const AddNewTask({super.key, required this.addnewTask});
@@ -14,11 +16,12 @@ class AddNewTask extends StatefulWidget {
 }
 
 class _AddNewTaskState extends State<AddNewTask> {
-
   TextEditingController titleController = TextEditingController();
-  TextEditingController dateController = TextEditingController();
+  TextEditingController userIdController = TextEditingController();
   TextEditingController timeController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
+
+  TodoService todoService = TodoService();
 
   TaskType taskType = TaskType.note;
   @override
@@ -147,12 +150,12 @@ class _AddNewTaskState extends State<AddNewTask> {
                     Expanded(
                       child: Column(
                         children: [
-                          Text("Date"),
+                          Text("User ID:"),
                           Padding(
                             padding: EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 7),
                             child: TextField(
-                              controller: dateController,
+                              controller: userIdController,
                               decoration: InputDecoration(
                                 filled: true,
                                 fillColor: Colors.white,
@@ -206,15 +209,9 @@ class _AddNewTaskState extends State<AddNewTask> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  Task newTask = Task(
-                    isCompleted: false,
-                    title: titleController.text,
-                    description: descriptionController.text,
-                    type: taskType,
-                  );
-                  widget.addnewTask(newTask);
-                  Navigator.of(context).pop(MaterialPageRoute(
-                      builder: (context) => HomePage()));
+                  saveTodo();
+                  Navigator.of(context)
+                      .pop(MaterialPageRoute(builder: (context) => HomePage()));
                 },
                 child: Text("Save"),
               ),
@@ -223,5 +220,15 @@ class _AddNewTaskState extends State<AddNewTask> {
         ),
       ),
     );
+  }
+
+  void saveTodo() {
+    Todo newtodo = Todo(
+      id: -1,
+      todo: titleController.text,
+      isCompleted: false,
+      userID: int.parse(userIdController.text),
+    );
+    todoService.addTodo(newtodo);
   }
 }
