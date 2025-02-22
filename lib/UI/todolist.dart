@@ -12,9 +12,15 @@ class TodoList extends StatefulWidget {
 class _TodoListState extends State<TodoList> {
   bool isChecked = false;
   @override
+  void initState() {
+    super.initState();
+    // Başlangıçta isChecked değerini task'in completed durumuna göre ayarla
+    isChecked = widget.task.isCompleted ?? false;
+  }
+  @override
   Widget build(BuildContext context) {
     return Card(
-      //color: widget.task.isCompleted! ? Colors.grey : Colors.white,
+      color: widget.task.isCompleted! ? Colors.grey : Colors.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Padding(
         padding: const EdgeInsets.all(20),
