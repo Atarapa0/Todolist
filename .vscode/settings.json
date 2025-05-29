@@ -1,0 +1,9 @@
+{
+    "files.autoSave": "afterDelay",
+    "cursor.aipreview.enabled": false,
+    "dart.debugExternalPackageLibraries": true,
+    "dart.hotReloadProgress": "statusBar",
+    "dart.cliConsole": "debugConsole",
+    "dart.debugSdkLibraries": true,
+    "dart.debugExtensionBackendProtocol": "ws"
+}
