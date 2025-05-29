@@ -90,12 +90,21 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.atarapa0" "\0"
+<<<<<<< HEAD
             VALUE "FileDescription", "todo_list" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "todo_list" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2025 com.atarapa0. All rights reserved." "\0"
             VALUE "OriginalFilename", "todo_list.exe" "\0"
             VALUE "ProductName", "todo_list" "\0"
+=======
+            VALUE "FileDescription", "todolist" "\0"
+            VALUE "FileVersion", VERSION_AS_STRING "\0"
+            VALUE "InternalName", "todolist" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2025 com.atarapa0. All rights reserved." "\0"
+            VALUE "OriginalFilename", "todolist.exe" "\0"
+            VALUE "ProductName", "todolist" "\0"
+>>>>>>> 096663da6ae9fab85d69aa4131df3813ad0814ae
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

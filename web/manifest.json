@@ -1,6 +1,11 @@
 {
+<<<<<<< HEAD
     "name": "todo_list",
     "short_name": "todo_list",
+=======
+    "name": "todolist",
+    "short_name": "todolist",
+>>>>>>> 096663da6ae9fab85d69aa4131df3813ad0814ae
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

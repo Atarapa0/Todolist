@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # todo_list
+=======
+# todolist
+>>>>>>> 096663da6ae9fab85d69aa4131df3813ad0814ae
 
 A new Flutter project.
 

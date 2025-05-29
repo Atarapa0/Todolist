@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "files.autoSave": "afterDelay",
     "cursor.aipreview.enabled": false,
     "dart.debugExternalPackageLibraries": true,
@@ -6,4 +7,8 @@
     "dart.cliConsole": "debugConsole",
     "dart.debugSdkLibraries": true,
     "dart.debugExtensionBackendProtocol": "ws"
+=======
+    "CodeGPT.apiKey": "CodeGPT Plus Beta",
+    "dart.hotReloadProgress": "statusBar"
+>>>>>>> 096663da6ae9fab85d69aa4131df3813ad0814ae
 }
